@@ -40,31 +40,26 @@ find_package(Eigen3 3.3.4 REQUIRED NO_MODULE)
 if (Eigen3_FOUND)
     message(STATUS "found eigen --version: " 
         "${Eigen3_VERSION} @ ${Eigen3_DIR}")
-
 endif (Eigen3_FOUND)
 
 
 find_package(LAPACKE QUIET)
 if (LAPACKE_FOUND) 
     message(STATUS "found lapacke ${LAPACKE_LIBRARIES}")
-
 elseif (LAPACKE_FOUND)
     message(STATUS "lapacke libraries disabled")
-
 endif (LAPACKE_FOUND)
 
 
 find_package(BLAS QUIET)
 if (BLAS_FOUND)
     message(STATUS "found blas ${BLAS_LIBRARIES}")
-
 endif (BLAS_FOUND)
 
 
 find_package(OpenMP QUIET)
 if (OpenMP_FOUND)
     message(STATUS "found openmp ${OpenMP_CXX_LIBRARIES}")
-
 endif (OpenMP_FOUND)
 
 
@@ -75,7 +70,6 @@ if (CUDAToolkit_FOUND)
     
     message(STATUS "enabling cuda language")
     enable_language(CUDA)
-
 endif (CUDAToolkit_FOUND)
 
 
@@ -83,7 +77,6 @@ find_package(GTest 1.14.0 REQUIRED QUIET)
 if (GTest_FOUND)
     message(STATUS "found gtest --version: "
         "${GTest_VERSION} @ ${GTest_ROOT}")
-
 endif(GTest_FOUND)
 
 
@@ -92,7 +85,7 @@ find_package(BOOST QUIET)
 
 
 
-# cmake aware of local scripts path
+# cmake aware of local scripts path.
 list(APPEND CMAKE_MODULE_PATH "${calibration_SOURCE_DIR}/cmake")
 include(CMakePackageConfigHelpers)      # -- ignore.
 include(GNUInstallDirs)                 # -- ignore.
