@@ -30,11 +30,11 @@ project(calibration C CXX)
 # why we might desire no_mod despite this, is because module 
 # mode might lead to less apparent errors due to Find Modules 
 # becoming out-of-date [1]. We strongly recommend installing
-# library dependencies using a package manager so that it works.
+# library dependencies using a package manager. 
 
-# note: if you intend to build dependencies from source, you will
-# have to modify the link and include directories to reflect the
-# absolute paths.
+# if you intend to build dependencies from source, and there
+# is definitely a case for it, link and include directories
+# should be modified to reflect their absolute paths.
 
 find_package(Eigen3 3.3.4 REQUIRED NO_MODULE)
 if (Eigen3_FOUND)
@@ -47,19 +47,19 @@ find_package(LAPACKE QUIET)
 if (LAPACKE_FOUND) 
     message(STATUS "found lapacke ${LAPACKE_LIBRARIES}")
 elseif (LAPACKE_FOUND)
-    message(STATUS "lapacke libraries disabled")
+    message(STATUS "lapacke libraries disabled\n")
 endif (LAPACKE_FOUND)
 
 
 find_package(BLAS QUIET)
 if (BLAS_FOUND)
-    message(STATUS "found blas ${BLAS_LIBRARIES}")
+    message(STATUS "found blas @ ${BLAS_LIBRARIES}")
 endif (BLAS_FOUND)
 
 
 find_package(OpenMP QUIET)
 if (OpenMP_FOUND)
-    message(STATUS "found openmp ${OpenMP_CXX_LIBRARIES}")
+    message(STATUS "found openmp ${OpenMP_CXX_LIB_NAMES}")
 endif (OpenMP_FOUND)
 
 
@@ -68,7 +68,7 @@ if (CUDAToolkit_FOUND)
     message(STATUS "found cuda toolkit --version: "
         "${CUDAToolkit_VERSION} @ ${CUDAToolkit_TARGET_DIR}")
     
-    message(STATUS "enabling cuda language")
+    message("    ... enabling cuda language")
     enable_language(CUDA)
 endif (CUDAToolkit_FOUND)
 
@@ -81,7 +81,17 @@ endif(GTest_FOUND)
 
 
 find_package(Matplot++ QUIET)
-find_package(BOOST QUIET)
+if (Matplot++_FOUND)
+    message(STATUS "found matplot++ --version: "
+        "${Matplot++_VERSION} @ ${Matplot++_DIR}")
+endif(Matplot++_FOUND)
+
+find_package(Boost 1.70 REQUIRED NO_MODULE)
+if (Boost_FOUND)
+    message(STATUS "found boost --version: "
+        "${Boost_VERSION} @ ${Boost_DIR}")
+endif(Boost_FOUND)
+
 
 
 
