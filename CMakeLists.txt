@@ -10,9 +10,9 @@ project(calibration C CXX)
 #  [[ find_package(<PackageName> [<version>] [QUIET] \
 #       [MODULE] [REQUIRED] [COMPONENTS <components>...])  ]]
 
-# where [.] are optional arguments. We do not expect additional
-# configuration to be required. In particular [MODULE] (<- no_mod) 
-# defines whether cmake searches for external configuration [1].
+# where [.] are optional arguments. We do not expect further
+# configuration to be required. In particular, [MODULE]
+# defines whether cmake searches external configuration [1].
 
 # If !no_mod, then it uses some (older style)
 
@@ -93,8 +93,6 @@ if (Boost_FOUND)
 endif(Boost_FOUND)
 
 
-
-
 # cmake aware of local scripts path.
 list(APPEND CMAKE_MODULE_PATH "${calibration_SOURCE_DIR}/cmake")
 include(CMakePackageConfigHelpers)      # -- ignore.
@@ -104,6 +102,9 @@ include(functions)                      # local scripts.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${calibration_SOURCE_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${calibration_SOURCE_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${calibration_SOURCE_DIR}/lib)
+
+
+
 
 
 
