@@ -13,10 +13,20 @@
 /*
    Linear algebra (vector, matrix) and component-
    wise (ndarray) operation template dtypes, based on
-   eigen. Use fixed sizes *only* when known at compile 
-   time and are small.
- 
+   eigen. Use fixed sizes *only* when they are known 
+   at compile time and are small. 
 
+   Since we cannot partially specialise templated 
+   aliases and we want to retain flexibility, we 
+   use default template parameters.
+
+   The downside is that behaviour cannot be
+   specialised: the internal structure cannot be
+   selectively modified to suit each type, and 
+   cannot change based on specific conditions.  
+   In principle it only works as a fallback, 
+   but this is enough for our purposes.
+ 
    Why we do not change the storage order of these
    dtypes (i.e., row-major, or column major)? This
    has to do with Eigen's default order, which is
@@ -63,6 +73,25 @@ template <typename T, Eigen::Index n = Eigen::Dynamic, Eigen::Index m = Eigen::D
 using matrix = Eigen::Matrix<T, n, m>;
 
 
+/*
+ * Solver types for linear systems of the form 
+ * Ax = b where:
+ *
+ *  -> A is an m x n matrix, with columns 
+ *      [a_1, ..., a_n]; 
+ *  -> x = [x_1, ..., x_n]  is an n-dimensional 
+ *       vector 
+ * 
+ * and thus,
+ *                          
+ *                      | x_1 |
+ *  Ax = [a_1, ... a_n] |  .  | = x_1 a_1 + ... + x_n a_n.
+ *                      | x_n |
+ * 
+ * At this stage, we dare not include sparse 
+ * solvers.
+*/
+
 enum linear_solver_type {
     dense_choleschy,
     dense_qr,
@@ -70,7 +99,10 @@ enum linear_solver_type {
 };
 
 
-
+enum gradient_type {
+    numerical,
+    analytic
+}
 
 
 
