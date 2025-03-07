@@ -105,7 +105,7 @@ enum gradient_type {
 
 enum population_initialization_type {
     latin_hypercube,
-    random
+    explicit
 };
 
 
