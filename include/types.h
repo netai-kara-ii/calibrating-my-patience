@@ -77,10 +77,9 @@ using matrix = Eigen::Matrix<T, n, m>;
  * Solver types for linear systems of the form 
  * Ax = b where:
  *
- *  -> A is an m x n matrix, with columns 
- *      [a_1, ..., a_n]; 
- *  -> x = [x_1, ..., x_n]  is an n-dimensional 
- *       vector 
+ *  -> A is an m x n matrix, with columns [a_1, ..., a_n];
+ *  
+ *  -> x = [x_1, ..., x_n]  is an n-dimensional vector; 
  * 
  * and thus,
  *                          
@@ -102,8 +101,12 @@ enum linear_solver_type {
 enum gradient_type {
     numerical,
     analytic
-}
+};
 
+enum population_initialization_type {
+    latin_hypercube,
+    random
+};
 
 
 #endif
