@@ -40,7 +40,7 @@ class Underlying final {
 
 class EncapsulatedUnderlying final {
     public:
-        Underlying(float spot, asset_type type);
+        EncapsulatedUnderlying(float spot, asset_type type);
         
         static std::vector<int> get_underlyings(void) {
             return underlyings;
