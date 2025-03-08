@@ -17,7 +17,28 @@ enum class asset_type {
   is more convenient but can lead to errors.
 */
 
+
 class Underlying final {
+    public:
+        Underlying(float spot, asset_type type);
+        
+        static std::vector<int> get_underlyings(void) {
+            return underlyings;
+        }
+
+        friend class EuropeanOption;
+
+        float spot;
+        asset_type type;
+        int idx;
+
+    private:
+        inline static std::vector<int> underlyings = {};
+};
+
+
+
+class EncapsulatedUnderlying final {
     public:
         Underlying(float spot, asset_type type);
         
@@ -39,31 +60,12 @@ class Underlying final {
         
         friend class EuropeanOption;
 
-        float spot;
-        asset_type type;
-        int idx;
 
     private:
         inline static std::vector<int> underlyings = {};
-};
-
-
-class SimpleUnderlying final {
-    public:
-        Underlying(float spot, asset_type type);
-        
-        static std::vector<int> get_underlyings(void) {
-            return underlyings;
-        }
-
-        friend class EuropeanOption;
-
         float spot;
         asset_type type;
         int idx;
-
-    private:
-        inline static std::vector<int> underlyings = {};
 };
 
 

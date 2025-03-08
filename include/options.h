@@ -61,11 +61,11 @@ class EuropeanOption final {
     
         option_type get_option_type(void) const {
             return type;
-        }
-        
-        Underlying underlying;
+        }    
+
         friend class BlackScholes;
 
+        Underlying underlying;
 
     private:
         option_type type;
