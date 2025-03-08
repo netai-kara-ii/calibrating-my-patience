@@ -52,7 +52,8 @@
    always memory contiguous regardless of the storage
    order. 
   
-   See [1], [2], for the full discussions.
+   Full discussions may be found in [1], [2].
+
 */
 
 
@@ -74,22 +75,25 @@ using matrix = Eigen::Matrix<T, n, m>;
 
 
 /*
- * Solver types for linear systems of the form 
- * Ax = b where:
- *
- *  -> A is an m x n matrix, with columns [a_1, ..., a_n];
- *  
- *  -> x = [x_1, ..., x_n]  is an n-dimensional vector; 
- * 
- * and thus,
- *                          
- *                      | x_1 |
- *  Ax = [a_1, ... a_n] |  .  | = x_1 a_1 + ... + x_n a_n.
- *                      | x_n |
- * 
- * At this stage, we dare not include sparse 
- * solvers.
-*/
+  Solver types for linear systems of the form 
+  Ax = b where 
+
+        A is an m x n matrix, with 
+        columns [a_1, ..., a_n]; and,
+
+        x = [x_1, ..., x_n]  is an n-dimensional
+        vector; 
+  
+  and thus,
+                           
+                        | x_1 |
+    Ax = [a_1, ... a_n] | ... | = x_1 a_1 + ... + x_n a_n.
+                        | x_n |
+  
+  At this stage, we dare not include sparse 
+  solvers.
+
+ */
 
 enum linear_solver_type {
     dense_choleschy,
@@ -104,8 +108,7 @@ enum gradient_type {
 };
 
 enum population_initialization_type {
-    latin_hypercube,
-    explicit
+    latin_hypercube
 };
 
 
@@ -118,6 +121,6 @@ enum population_initialization_type {
     [1]. Eigen. Tux Family Org. [The Matrix Class, Fixed vs. Dynamic Size] 
             https://eigen.tuxfamily.org/dox/group__TutorialMatrixClass.html
   
-    [2]. Tux Family Org.[Storage Orders, Storage Orders in Eigen]
+    [2]. Eigen. Tux Family Org.[Storage Orders, Storage Orders in Eigen]
             https://eigen.tuxfamily.org/dox/group__TopicStorageOrders.html 
 */

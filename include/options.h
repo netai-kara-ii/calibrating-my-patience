@@ -1,4 +1,4 @@
-#indef OPTIONS_H
+#ifndef OPTIONS_H
 #define OPTIONS_H
 
 
