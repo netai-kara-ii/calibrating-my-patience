@@ -11,6 +11,11 @@ enum class asset_type {
     commodity
 };
 
+/* 
+  think about better api design. exposed
+  member attributes? or encapsulate? first
+  is more convenient but can lead to errors.
+*/
 
 class Underlying final {
     public:
@@ -31,13 +36,33 @@ class Underlying final {
         asset_type get_asset_type(void) const {
             return type;
         }
-
+        
         friend class EuropeanOption;
 
-    private:
         float spot;
         asset_type type;
         int idx;
+
+    private:
+        inline static std::vector<int> underlyings = {};
+};
+
+
+class SimpleUnderlying final {
+    public:
+        Underlying(float spot, asset_type type);
+        
+        static std::vector<int> get_underlyings(void) {
+            return underlyings;
+        }
+
+        friend class EuropeanOption;
+
+        float spot;
+        asset_type type;
+        int idx;
+
+    private:
         inline static std::vector<int> underlyings = {};
 };
 
