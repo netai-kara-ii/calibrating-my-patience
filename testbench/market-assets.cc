@@ -37,9 +37,15 @@ TEST_F(MarketAssetsTest, CorrectIndices) {
 
     for (unsigned int i = 0; i < n_contracts; i++) {
          if (i < midpoint) {
-            options.emplace_back(EuropeanOption(*stock, option_type::put));
+            options.emplace_back(
+                EuropeanOption(*stock, option_type::put)
+            );
+
          } else {
-            options.emplace_back(EuropeanOption(*stock, option_type::call));
+            options.emplace_back(
+                EuropeanOption(*stock, option_type::call)
+            );
+
          }
     }
 
