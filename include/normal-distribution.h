@@ -21,8 +21,8 @@ class StandardGaussian final {
             /*
              * Args: n-space vector of points x, of any real type.
              *
-             * Performs element-wise cumulative distribution function in
-             * terms of the erf. Uses built-in Eigen function.
+             * Performs element-wise cumulative distribution function in terms
+             * of the erf. Uses built-in Eigen function.
             */
 
             return (T)0.5 * ((T)1 + erf(x * INV_SQRT_TWO)); 
@@ -34,11 +34,11 @@ class StandardGaussian final {
              * Args: n-space vector of probabilities p, therefore verifying 
              * 0 <= p_i <= 1 for every i = 1, ..., n, of any real type.
              * 
-             * Performs element-wise inverse cummulative distribution 
-             * function (quantile), in terms of the inverse erf. Passes
-             * a capture-less lambda that shifts and scales arguments 
-             * to fit Gaussian dist. The initial idea was to use a 
-             * function pointer but Eigen does not like it.
+             * Performs element-wise inverse cummulative distribution function
+             * (i.e., quantile), in terms of the inverse erf. Passes a capture
+             * -less lambda that shifts and scales arguments to fit the target
+             * Gaussian distribution. The initial idea was to use a function 
+             * pointer but Eigen does not like it.
             */
 
             return p.unaryExpr([](T e) { return SQRT_TWO * std::erf_inv((T)2 * e - (T)1); }); 
