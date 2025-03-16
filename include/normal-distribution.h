@@ -44,22 +44,20 @@ class StandardGaussian final {
             return p.unaryExpr([](T e) { return SQRT_TWO * std::erf_inv((T)2 * e - (T)1); }); 
         }
          
-       
     private:
         static constexpr T INV_SQRT_TWO;
         static constexpr T SQRT_TWO; 
-
+       
 };
+
 
 template <typename T>
 constexpr T StandardGaussian<T>::INV_SQRT_TWO = static_cast<T>(std::numbers::inv_sqrt2);
 
+
 template <typename T>
 constexpr T StandardGaussian<T>::SQRT_TWO = static_cast<T>(std::numbers::sqrt2);
 
-
-// to do: test and benchmark. Particularly return value optimizations, and check for 
-// speedups with vectorization over boost (baseline).
 
 
 #endif
