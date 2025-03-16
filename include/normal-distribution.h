@@ -10,10 +10,16 @@
 template <typename T>
 class StandardGaussian final {
 
-    /*
-     * Vectorised cdf and icdf for the standard Gaussian (zero mean,
-     * unit variance) distribution. 
-    */
+        /*
+         * Vectorised cdf and icdf for the standard Gaussian (zero mean,
+         * unit variance) distribution. 
+        */
+
+        static_assert(std::is_floating_point_v<T>);
+
+    private:
+        static constexpr T INV_SQRT_TWO, SQRT_TWO;
+
 
     public:
         ndarray<T> cdf(ndarray<T> x) { 
@@ -25,7 +31,7 @@ class StandardGaussian final {
              * of the erf. Uses built-in Eigen function.
             */
 
-            return (T)0.5 * ((T)1 + erf(x * INV_SQRT_TWO)); 
+               return (T)0.5 * ((T)1 + erf(x * INV_SQRT_TWO)); 
         }
 
         ndarray<T> icdf(ndarray<T> p) {
@@ -43,11 +49,6 @@ class StandardGaussian final {
 
             return p.unaryExpr([](T e) { return SQRT_TWO * std::erf_inv((T)2 * e - (T)1); }); 
         }
-         
-    private:
-        static constexpr T INV_SQRT_TWO;
-        static constexpr T SQRT_TWO; 
-       
 };
 
 
@@ -61,3 +62,13 @@ constexpr T StandardGaussian<T>::SQRT_TWO = static_cast<T>(std::numbers::sqrt2);
 
 
 #endif
+
+        /*
+         * C-style casts are obviously type-unsafe since there are no
+         * compiler checks. However, we are neither working with ptrs
+         * (i.e., mapping the memory layout over to a different type)
+         * nor risk overflowing our types. Particularly, we also avoid
+         * numerical errors by enforcing a floating point type since
+         * they are not clamped, and will go to their respective limits.
+        */
+
