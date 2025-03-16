@@ -19,19 +19,20 @@ class StandardGaussian final {
         ndarray<T> cdf(ndarray<T> x) { 
 
             /*
-             * Args: a vector of points x \in R^n, of any real type.
+             * Args: n-space vector of points x, of any real type.
              *
-             * Performs element-wise cumulative distribution function
-             * in terms of the erf. Uses built-in Eigen function.
+             * Performs element-wise cumulative distribution function in
+             * terms of the erf. Uses built-in Eigen function.
             */
 
-            return (T)0.5 * ((T)1 + erf(x * INV_SQRT_TWO)); }
+            return (T)0.5 * ((T)1 + erf(x * INV_SQRT_TWO)); 
+        }
 
         ndarray<T> icdf(ndarray<T> p) {
 
             /*
-             * Args: a vector of probabilities p, therefore verifying 
-             * 0 <= p_i <= 1 for every i = 1, ..., N, of any real type.
+             * Args: n-space vector of probabilities p, therefore verifying 
+             * 0 <= p_i <= 1 for every i = 1, ..., n, of any real type.
              * 
              * Performs element-wise inverse cummulative distribution 
              * function (quantile), in terms of the inverse erf. Passes
@@ -40,8 +41,7 @@ class StandardGaussian final {
              * function pointer but Eigen does not like it.
             */
 
-            return p.unaryExpr([](T e) { return SQRT_TWO * std::erf_inv((T)2 * e - (T)1); }, 
-                        Eigen:A:Vectorized()); 
+            return p.unaryExpr([](T e) { return SQRT_TWO * std::erf_inv((T)2 * e - (T)1); }); 
         }
          
        
