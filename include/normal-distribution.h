@@ -20,7 +20,6 @@ class StandardGaussian final {
     private:
         static constexpr T INV_SQRT_TWO, SQRT_TWO;
 
-
     public:
         ndarray<T> cdf(ndarray<T> x) { 
 
@@ -62,13 +61,3 @@ constexpr T StandardGaussian<T>::SQRT_TWO = static_cast<T>(std::numbers::sqrt2);
 
 
 #endif
-
-        /*
-         * C-style casts are obviously type-unsafe since there are no
-         * compiler checks. However, we are neither working with ptrs
-         * (i.e., mapping the memory layout over to a different type)
-         * nor risk overflowing our types. Particularly, we also avoid
-         * numerical errors by enforcing a floating point type since
-         * they are not clamped, and will go to their respective limits.
-        */
-
