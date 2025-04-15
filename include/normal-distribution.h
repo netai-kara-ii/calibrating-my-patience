@@ -8,7 +8,7 @@
 
 #include "types.h"
 
-
+#include <boost/math/special_functions/erf.hpp>
 #include <unsupported/Eigen/SpecialFunctions>
 
 template <typename T>
@@ -22,7 +22,8 @@ class StandardGaussian final {
         static_assert(std::is_floating_point_v<T>);
 
     private:
-        static constexpr T INV_SQRT_TWO, SQRT_TWO;
+        static constexpr T INV_SQRT_TWO = static_cast<T>(1. / 1.4142135623730951);
+        static constexpr T SQRT_TWO = static_cast<T>(1.4142135623730951);
 
     public:
         ndarray<T> cdf(ndarray<T> x) { 
@@ -50,17 +51,9 @@ class StandardGaussian final {
              * pointer but eigen does not like it.
             */
 
-            return p.unaryExpr([](T e) { return SQRT_TWO * std::erf_inv((T)2 * e - (T)1); }); 
+            return p.unaryExpr([](T e) { return SQRT_TWO * boost::math::erf_inv((T)2 * e - (T)1); }); 
         }
 };
-
-
-template <typename T>
-constexpr T StandardGaussian<T>::INV_SQRT_TWO = static_cast<T>(std::numbers::inv_sqrt2);
-
-
-template <typename T>
-constexpr T StandardGaussian<T>::SQRT_TWO = static_cast<T>(std::numbers::sqrt2);
 
 
 
